@@ -94,7 +94,7 @@ comparable to the overall one. `meets_target` compares the rate to
 `.github/workflows/ci.yml` runs on pushes to `main`, version tags, and PRs:
 
 1. **lint** — ruff lint, ruff format check, mypy.
-3. **image** — build with buildx (GHA layer cache), start the container and
+2. **image** — build with buildx (GHA layer cache), start the container and
    assert `/health` responds, then push to `ghcr.io/<owner>/<repo>` on push
    events. PRs build and smoke-test without pushing.
 

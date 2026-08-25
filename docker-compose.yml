@@ -1,0 +1,25 @@
+services:
+  api:
+    build:
+      context: .
+      target: runtime
+    image: seat-utilization:dev
+    ports:
+      - "8000:8000"
+    environment:
+      APP_ENV: local
+      APP_LOG_LEVEL: DEBUG
+      APP_TARGET_UTILIZATION: "0.70"
+      APP_SEED_HISTORY_DAYS: "14"
+    # Mounting the package over the installed copy gives working hot-reload:
+    # /app is the workdir, so ./app shadows the version inside the venv.
+    volumes:
+      - ./app:/app/app:ro
+    command:
+      - uvicorn
+      - app.main:app
+      - --host
+      - 0.0.0.0
+      - --port
+      - "8000"
+      - --reload
